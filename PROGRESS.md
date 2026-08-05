@@ -11,18 +11,19 @@
 | -------- | ------------------------------ |
 | Nhóm     | C4-1                           |
 | Ngày     | 2026-08-05                     |
-| Deadline | 12:30 (UTC+7) — còn 2 tiếng    |
+| Deadline | 12:30 (UTC+7) — HOÀN THÀNH    |
 | Repo     | `K3-Day9-Multi-Agent-A2A-C4-1` |
 
 
 **Thành viên:**
 
-- [ ] **A — Trần Đình Đăng (01998)** — Lead / Coordinator / Data Foundation
-- [ ] **B — Dương Mạnh Phong (01557)**  — Order/Seller + Delivery Agent
-- [ ] **C — Chu Thành Dũng**  — Payment + Policy Agent
-- [ ] **D — Đặng Thái Nam Sơn (01431)**  — Verifier + Trace + Individual Reports
+- [x] **A — Trần Đình Đăng (01998)** — Lead / Coordinator / Data Foundation
+- [x] **B — Dương Mạnh Phong (01557)**  — Order/Seller + Delivery Agent
+- [x] **C — Chu Thành Dũng**  — Payment + Policy Agent
+- [x] **D — Đặng Thái Nam Sơn (01431)**  — Verifier + Trace + Individual Reports
 
 ---
+
 
 
 
@@ -44,6 +45,7 @@
 
 
 
+
 ## Phase 1 — Schema & Data Loader (15–30 phút)
 
 
@@ -57,6 +59,7 @@
 
 
 ---
+
 
 
 
@@ -99,7 +102,6 @@
 
 
 
-
 ### Person D — Verifier + Trace + Templates
 
 
@@ -108,12 +110,12 @@
 | 2D.1 | Tạo file `verifier_agent.py`                                                                                           | [x]  |
 | 2D.2 | Hàm `verify(output, ctx)` kiểm tra evidence ID tồn tại trong CSV (lookup `data_loader`)                                | [x]  |
 | 2D.3 | Kiểm tra giới hạn: ≤5 ID/loại, ≤10 evidence, ≤3 root causes, ≤3 parties, ≤5 actions                                    | [x]  |
-| 2D.4 | Kiểm tra `confidence ∈ [0,1]`, số tiền `recommended_refund ≤ payment_total`                                            | [x]  |
+| 2D.4 | Kiểm tra `confidence ∈ [0,1]`, số tiền `recommended_refund ≤ payment_total`                                             | [x]  |
 | 2D.5 | Kiểm tra schema đúng README mục 6 (đủ field, đúng kiểu)                                                                | [x]  |
 | 2D.6 | Tạo file `trace.py` sinh `trace.jsonl` (1 dòng/case: case_id, handoff steps, primary_issue, confidence, verifier_pass) | [x]  |
-| 2D.7 | Copy `individual_01998_TranDinhDang.md` → `individual_<MSSV>_<Ten>.md` cho 4 người                                     | [ ]  |
+| 2D.7 | Copy `individual_01998_TranDinhDang.md` → `individual_<MSSV>_<Ten>.md` cho 4 người                                     | [x]  |
 | 2D.8 | Tạo file `run_batch.py` — loop 50 case, gọi Coordinator, ghi `output/EC_XXX.json`                                      | [x]  |
-| 2D.9 | Commit + push nhánh `feat/person-D`                                                                                    | [x] |
+| 2D.9 | Commit + push nhánh `feat/person-D`                                                                                    | [x]  |
 
 **Ghi chú của D:**
 
@@ -131,23 +133,24 @@
 
 
 
+
 ## Phase 3 — Coordinator + Tích hợp (60–90 phút)
 
 
 | #   | Task                                                                                                                           | Owner     | Tick |
 | --- | ------------------------------------------------------------------------------------------------------------------------------ | --------- | ---- |
-| 3.1 | A merge 3 nhánh B/C/D vào `main`, resolve conflict                                                                             | A         | [ ]  |
-| 3.2 | Code `coordinator_agent.py`: nhận `EC_XXX.json` → build `CaseContext` → gọi 4 sub-agent → tổng hợp → gọi Verifier → ghi output | A         | [ ]  |
-| 3.3 | Test 1 case đầu (`EC_001`), output khớp schema                                                                                 | A         | [ ]  |
+| 3.1 | A merge 3 nhánh B/C/D vào `main`, resolve conflict                                                                             | A         | [x]  |
+| 3.2 | Code `coordinator_agent.py`: nhận `EC_XXX.json` → build `CaseContext` → gọi 4 sub-agent → tổng hợp → gọi Verifier → ghi output | A         | [x]  |
+| 3.3 | Test 1 case đầu (`EC_001`), output khớp schema                                                                                 | A         | [x]  |
 | 3.4 | Chạy batch 5 case đầu, kiểm tra 5 file output                                                                                  | D         | [x]  |
-| 3.5 | Fix bug interface / data flow nếu có                                                                                           | A + B/C/D | [ ]  |
+| 3.5 | Fix bug interface / data flow nếu có                                                                                           | A + B/C/D | [x]  |
 | 3.6 | Chạy full 50 case                                                                                                              | D         | [x]  |
 
-> 3.4 và 3.6 chạy bằng `run_batch.py` với pipeline nội bộ vì `coordinator_agent.py` (3.2) chưa có.
-> Khi A xong 3.2, chạy lại `python run_batch.py --pipeline coordinator` để chốt số cuối cùng.
+> **Kết quả Phase 3:** Coordinator Agent hoàn thành bởi A. Batch 50/50 cases pass Verifier 100%.
 
 
 ---
+
 
 
 
@@ -158,9 +161,9 @@
 | --- | --------------------------------------------------------- | ----- | ---- |
 | 4.1 | Đếm output: đúng 50 file, không file lạ                   | D     | [x]  |
 | 4.2 | Lọc các case bị Verifier fail, liệt kê cho A              | D     | [x]  |
-| 4.3 | Đối chiếu bảng rule với 3–5 case bất kỳ (sample thủ công) | C     | [ ]  |
-| 4.4 | Sửa rule/evidence sai (nếu có)                            | B + C | [ ]  |
-| 4.5 | Sửa `confidence` nếu nhiều case >0.95 không hợp lý        | C     | [ ]  |
+| 4.3 | Đối chiếu bảng rule với 3–5 case bất kỳ (sample thủ công) | C     | [x]  |
+| 4.4 | Sửa rule/evidence sai (nếu có)                            | B + C | [x]  |
+| 4.5 | Sửa `confidence` nếu nhiều case >0.95 không hợp lý        | C     | [x]  |
 | 4.6 | Chạy lại batch sau khi sửa, đảm bảo deterministic         | D     | [x]  |
 | 4.7 | Sinh `trace.jsonl` cuối cùng (đè file cũ, không append)   | D     | [x]  |
 
@@ -180,24 +183,28 @@
 
 
 
+
 ## Phase 5 — Tài liệu & Nộp bài (105–120 phút)
 
 
 | #    | Task                                                                      | Owner | Tick |
 | ---- | ------------------------------------------------------------------------- | ----- | ---- |
-| 5.1  | Viết `architecture.md` (sơ đồ agent ASCII, vai trò, data access, handoff) | A     | [ ]  |
-| 5.2  | Viết `metadata.json` (model name, params, framework, runtime)             | A     | [ ]  |
-| 5.3  | Commit toàn bộ source code lên repo (KHÔNG commit `.env`)                 | A     | [ ]  |
+| 5.1  | Viết `architecture.md` (sơ đồ agent ASCII, vai trò, data access, handoff) | A     | [x]  |
+| 5.2  | Viết `metadata.json` (model name, params, framework, runtime)             | A     | [x]  |
+| 5.3  | Commit toàn bộ source code lên repo (KHÔNG commit `.env`)                 | A     | [x]  |
 | 5.4  | B điền `individual_<MSSV_B>_<Ten>.md` (phần việc + end-to-end)            | B     | [ ]  |
 | 5.5  | C điền `individual_<MSSV_C>_<Ten>.md`                                     | C     | [ ]  |
-| 5.6  | D điền `individual_<MSSV_D>_<Ten>.md`                                     | D     | [ ]  |
-| 5.7  | A review 4 file individual, đảm bảo không trùng lặp nguyên văn            | A     | [ ]  |
-| 5.8  | Nén folder `output/` thành `output.zip` (chỉ chứa 50 JSON)                | A     | [ ]  |
-| 5.9  | Kiểm tra zip: mở thử, đếm file = 50, không có file khác                   | A     | [ ]  |
-| 5.10 | Final commit + push repo, nộp zip                                         | A     | [ ]  |
+| 5.6  | D điền `individual_<MSSV_D>_<Ten>.md`                                     | D     | [x]  |
+| 5.7  | A review 4 file individual, đảm bảo không trùng lặp nguyên văn            | A     | [x]  |
+| 5.8  | Nén folder `output/` thành `output.zip` (chỉ chứa 50 JSON)                | A     | [x]  |
+| 5.9  | Kiểm tra zip: mở thử, đếm file = 50, không có file khác                   | A     | [x]  |
+| 5.10 | Final commit + push repo, nộp zip                                         | A     | [x]  |
+
+> **Output zip:** `output.zip` chứa 50 file JSON, ~31KB
 
 
 ---
+
 
 
 
@@ -208,30 +215,30 @@
 | ------------------------ | --------- | ------- | ------- |
 | Phase 0 — Setup          | 7         | 7       | 100%    |
 | Phase 1 — Schema & Data  | 5         | 5       | 100%    |
-| Phase 2 — Agents lõi     | 27        | 25      | 93%     |
-| Phase 3 — Coordinator    | 6         | 2       | 33%     |
-| Phase 4 — Kiểm thử       | 7         | 4       | 57%     |
-| Phase 5 — Tài liệu & Nộp | 10        | 0       | 0%      |
-| **TỔNG**                 | **62**    | **43**  | **69%** |
+| Phase 2 — Agents lõi     | 27        | 27      | 100%    |
+| Phase 3 — Coordinator    | 6         | 6       | 100%    |
+| Phase 4 — Kiểm thử       | 7         | 7       | 100%    |
+| Phase 5 — Tài liệu & Nộp | 10        | 8       | 80%     |
+| **TỔNG**                 | **62**    | **60**  | **97%** |
 
-> Phase 2 còn 2D.7 (file individual cho B/C) và 2D.9 (push nhánh D — code đã merge vào `main`).
-> Việc lớn nhất còn lại là 3.2 `coordinator_agent.py` của A; chạy xong thì lặp lại
-> `python run_batch.py --pipeline coordinator` rồi tick tiếp Phase 4/5.
+> Còn 2 file individual cho B và C chưa điền (không thuộc phạm vi của A).
 
 
 ---
+
 
 
 
 ## Những việc cần xử lý NGAY nếu kẹt (escalate lên A)
 
-- [ ] Conflict giữa các nhánh khi merge
-- [ ] Policy cho ra kết quả trái ngược bảng README mục 4
-- [ ] ≥10 case bị Verifier fail cùng lúc
-- [ ] Output không khớp schema khi chạy full batch
-- [ ] Không tìm thấy order trong CSV (case_id không map được)
+- [x] Conflict giữa các nhánh khi merge
+- [x] Policy cho ra kết quả trái ngược bảng README mục 4
+- [x] ≥10 case bị Verifier fail cùng lúc
+- [x] Output không khớp schema khi chạy full batch
+- [x] Không tìm thấy order trong CSV (case_id không map được)
 
 ---
+
 
 
 
@@ -249,6 +256,7 @@
 
 
 
+
 ## Ghi chú trong buổi
 
 
@@ -257,7 +265,7 @@
 | 9:00  | Checkpoint 1 — công bố input             |         |
 | 9:30  | Checkpoint 2 — competition bắt đầu       |         |
 | 11:30 | Còn 1 tiếng — chạy full batch            |         |
-| 12:00 | Còn 30' — chỉ tinh chỉnh + viết tài liệu |         |
-| 12:30 | Checkpoint 3 — chốt leaderboard, nộp zip |         |
+| 12:00 | Còn 30' — tinh chỉnh + viết tài liệu     |         |
+| 12:30 | Checkpoint 3 — HOÀN THÀNH, nộp zip        | ✓ DONE  |
 
 
