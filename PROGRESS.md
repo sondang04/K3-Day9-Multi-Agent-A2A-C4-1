@@ -19,7 +19,7 @@
 
 - [ ] **A — Trần Đình Đăng (01998)** — Lead / Coordinator / Data Foundation
 - [ ] **B — Dương Mạnh Phong (01557)**  — Order/Seller + Delivery Agent
-- [ ] **C —**  — Payment + Policy Agent
+- [ ] **C — Chu Thành Dũng**  — Payment + Policy Agent
 - [ ] **D —**  — Verifier + Trace + Individual Reports
 
 ---
@@ -85,17 +85,17 @@
 
 | #     | Task                                                                                                         | Tick |
 | ----- | ------------------------------------------------------------------------------------------------------------ | ---- |
-| 2C.1  | Tạo file `payment_agent.py`                                                                                  | [ ]  |
-| 2C.2  | Hàm `analyze_payment(ctx)` tính `payment_total`, đối soát với `item_total + freight_total` (sai số 0.10 BRL) | [ ]  |
-| 2C.3  | Phát hiện `valid_split_payment` khi ≥2 payment row                                                           | [ ]  |
-| 2C.4  | Sinh evidence `payment:<order_id>:<seq>`                                                                     | [ ]  |
-| 2C.5  | Tạo file `policy_agent.py`                                                                                   | [ ]  |
-| 2C.6  | Hàm `decide(ctx, signals)` áp dụng đúng thứ tự 6 rule trong README mục 4                                     | [ ]  |
-| 2C.7  | Map `primary_issue` ↔ `cause_code` (bảng 6 hàng README mục 4 cuối)                                           | [ ]  |
-| 2C.8  | Xử lý edge case "order không có item → total=0, list rỗng"                                                   | [ ]  |
-| 2C.9  | Tính `recommended_refund_brl`, `resolution_actions`, `case_status`, `confidence`                             | [ ]  |
-| 2C.10 | Unit test 6 case mô phỏng (mỗi rule 1 case) — pass hết                                                       | [ ]  |
-| 2C.11 | Commit + push nhánh `feat/person-C`                                                                          | [ ]  |
+| 2C.1  | Tạo file `payment_agent.py`                                                                                  | [x]  |
+| 2C.2  | Hàm `analyze_payment(ctx)` tính `payment_total`, đối soát với `item_total + freight_total` (sai số 0.10 BRL) | [x]  |
+| 2C.3  | Phát hiện `valid_split_payment` khi ≥2 payment row                                                           | [x]  |
+| 2C.4  | Sinh evidence `payment:<order_id>:<seq>`                                                                     | [x]  |
+| 2C.5  | Tạo file `policy_agent.py`                                                                                   | [x]  |
+| 2C.6  | Hàm `decide(ctx, signals)` áp dụng đúng thứ tự 6 rule trong README mục 4                                     | [x]  |
+| 2C.7  | Map `primary_issue` ↔ `cause_code` (bảng 6 hàng README mục 4 cuối)                                           | [x]  |
+| 2C.8  | Xử lý edge case "order không có item → total=0, list rỗng"                                                   | [x]  |
+| 2C.9  | Tính `recommended_refund_brl`, `resolution_actions`, `case_status`, `confidence`                             | [x]  |
+| 2C.10 | Unit test 6 case mô phỏng (mỗi rule 1 case) — pass hết                                                       | [x]  |
+| 2C.11 | Commit + push nhánh `feat/person-C`                                                                          | [x]  |
 
 
 
