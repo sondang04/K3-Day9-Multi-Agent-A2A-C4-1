@@ -113,7 +113,7 @@
 | 2D.6 | Tạo file `trace.py` sinh `trace.jsonl` (1 dòng/case: case_id, handoff steps, primary_issue, confidence, verifier_pass) | [x]  |
 | 2D.7 | Copy `individual_01998_TranDinhDang.md` → `individual_<MSSV>_<Ten>.md` cho 4 người                                     | [ ]  |
 | 2D.8 | Tạo file `run_batch.py` — loop 50 case, gọi Coordinator, ghi `output/EC_XXX.json`                                      | [x]  |
-| 2D.9 | Commit + push nhánh `feat/person-D`                                                                                    | [ ]  |
+| 2D.9 | Commit + push nhánh `feat/person-D`                                                                                    | [x] |
 
 **Ghi chú của D:**
 

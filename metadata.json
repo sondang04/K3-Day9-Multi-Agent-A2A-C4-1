@@ -1,0 +1,54 @@
+{
+  "model_name": "qwen/qwen3.5-9b",
+  "model_provider": "openrouter",
+  "parameter_size": "9B",
+  "framework": "Python 3.x with custom multi-agent orchestration",
+  "runtime": "local",
+  "agents": [
+    {
+      "name": "coordinator_agent",
+      "role": "Lead/Coordinator",
+      "owner": "Tran Dinh Dang (01998)"
+    },
+    {
+      "name": "order_seller_agent",
+      "role": "Order & Seller Analysis",
+      "owner": "Duong Manh Phong (01557)"
+    },
+    {
+      "name": "delivery_agent",
+      "role": "Delivery Timing Analysis",
+      "owner": "Duong Manh Phong (01557)"
+    },
+    {
+      "name": "payment_agent",
+      "role": "Payment Reconciliation",
+      "owner": "Chu Thanh Dung"
+    },
+    {
+      "name": "policy_agent",
+      "role": "Business Rule Engine",
+      "owner": "Chu Thanh Dung"
+    },
+    {
+      "name": "verifier_agent",
+      "role": "Output Validation",
+      "owner": "Dang Thai Nam Son (01431)"
+    }
+  ],
+  "data_sources": {
+    "orders": "olist_orders_dataset.csv",
+    "order_items": "olist_order_items_dataset.csv",
+    "payments": "olist_order_payments_dataset.csv",
+    "customers": "olist_customers_dataset.csv",
+    "sellers": "olist_sellers_dataset.csv",
+    "reviews": "olist_order_reviews_dataset.csv",
+    "products": "olist_products_dataset.csv"
+  },
+  "batch_info": {
+    "total_cases": 50,
+    "input_pattern": "input/EC_*.json",
+    "output_pattern": "output/EC_*.json",
+    "verifier_pass_rate": "100%"
+  }
+}
