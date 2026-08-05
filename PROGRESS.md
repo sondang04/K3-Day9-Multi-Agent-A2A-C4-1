@@ -18,7 +18,7 @@
 **Thành viên:**
 
 - [ ] **A — Trần Đình Đăng (01998)** — Lead / Coordinator / Data Foundation
-- [ ] **B —**  — Order/Seller + Delivery Agent
+- [ ] **B — **  — Order/Seller + Delivery Agent
 - [ ] **C —**  — Payment + Policy Agent
 - [ ] **D —**  — Verifier + Trace + Individual Reports
 
