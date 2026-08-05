@@ -117,45 +117,7 @@ md5sum output/*.json | md5sum
 
 ## 6. Một lỗi hoặc blocker đã xử lý
 
-- **Triệu chứng/lỗi nguyên văn:** khi merge nhánh `sondang` vào `main`, git báo conflict ở `PROGRESS.md`:
-
-  ```text
-  Auto-merging PROGRESS.md
-  CONFLICT (content): Merge conflict in PROGRESS.md
-  Automatic merge failed; fix conflicts and then commit the result.
-  ```
-
-  Nhưng vấn đề nghiêm trọng hơn lại **không** được git báo: `git status` cho thấy `individual_01998_TranDinhDang.md` bị đánh dấu `M`, tức merge tự động sẽ ghi đè file báo cáo của A.
-
-- **Lệnh hoặc bước tái hiện:**
-
-  ```bash
-  git merge --ff-only origin/main
-  git merge sondang
-  git diff --cached HEAD -- individual_01998_TranDinhDang.md
-  ```
-
-- **Nguyên nhân gốc:** các file báo cáo cá nhân được tạo bằng cách copy template, và trên nhánh `sondang` file của A (`individual_01998_...`) bị điền nhầm thông tin của tôi. Trên `main`, A đã reset file đó về template trắng. Do phía `sondang` có sửa đổi so với merge base còn phía `main` thì không, git chọn phía `sondang` — đúng theo thuật toán merge nhưng sai theo ý nghĩa dữ liệu, và loại lỗi này im lặng vì nó không tạo conflict.
-
-- **Cách xử lý:** lấy lại bản của `main` cho đúng file đó trước khi commit merge, và chỉ resolve thủ công phần conflict thật trong `PROGRESS.md` (danh sách thành viên):
-
-  ```bash
-  git checkout HEAD -- individual_01998_TranDinhDang.md
-  ```
-
-  Ngoài ra tôi làm lại merge cho gọn: trạng thái ban đầu là octopus merge (`sondang` + `origin/main` vào một `main` cũ hơn 8 commit), tôi `git merge --abort`, fast-forward `main` lên `origin/main` rồi mới merge `sondang` — cùng nội dung nhưng history 2 cha thay vì 3.
-
-- **Cách xác minh sau khi sửa:** kiểm tra file của A đã về đúng template trắng, không còn tên tôi:
-
-  ```bash
-  sed -n '8,13p' individual_01998_TranDinhDang.md
-  # | Họ và tên | [Họ và tên] |
-  # | MSSV      | [MSSV]      |
-  ```
-
-  Sau đó chạy lại toàn bộ test trên cây đã merge: `test_person_d.py` 35/35, `test_person_c.py` 8/8, `test_person_b.py` pass, và `python run_batch.py --quiet --no-trace` cho 50/50 verifier pass.
-
-- **Điều học được:** conflict mà git báo thường là phần dễ; phần nguy hiểm là những file được merge "thành công" theo thuật toán nhưng sai theo ngữ nghĩa. Sau merge phải đọc `git status` / `git diff --cached` cho **mọi** file thay đổi chứ không chỉ file có dấu conflict, nhất là với tài liệu do người khác sở hữu.
+--
 
 ## 7. Hiểu biết về luồng end-to-end
 
