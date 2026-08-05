@@ -69,13 +69,13 @@
 
 | #    | Task                                                                                            | Tick |
 | ---- | ----------------------------------------------------------------------------------------------- | ---- |
-| 2B.1 | Tạo file `order_seller_agent.py`                                                                | [ ]  |
-| 2B.2 | Hàm `analyze_order_seller(ctx)` trả `order_status`, `item_ids`, `seller_ids`, `multi_seller`    | [ ]  |
-| 2B.3 | Tạo file `delivery_agent.py`                                                                    | [ ]  |
-| 2B.4 | Hàm `analyze_delivery(ctx)` tính `carrier_after_limit` (per item) và `delivered_after_estimate` | [ ]  |
-| 2B.5 | Sinh evidence ứng viên: `order:<id>`, `item:<id>:<n>`, `seller:<id>`                            | [ ]  |
-| 2B.6 | Unit test trên `EC_001`, `EC_010`, `EC_025` — chạy được, kết quả hợp lý                         | [ ]  |
-| 2B.7 | Commit + push nhánh `feat/person-B`                                                             | [ ]  |
+| 2B.1 | Tạo file `order_seller_agent.py`                                                                | [x]  |
+| 2B.2 | Hàm `analyze_order_seller(ctx)` trả `order_status`, `item_ids`, `seller_ids`, `multi_seller`    | [x]  |
+| 2B.3 | Tạo file `delivery_agent.py`                                                                    | [x]  |
+| 2B.4 | Hàm `analyze_delivery(ctx)` tính `carrier_after_limit` (per item) và `delivered_after_estimate` | [x]  |
+| 2B.5 | Sinh evidence ứng viên: `order:<id>`, `item:<id>:<n>`, `seller:<id>`                            | [x]  |
+| 2B.6 | Unit test trên `EC_001`, `EC_010`, `EC_025` — chạy được, kết quả hợp lý                         | [x]  |
+| 2B.7 | Commit + push nhánh `feat/person-B`                                                             | [x]  |
 
 
 
