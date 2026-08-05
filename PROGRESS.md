@@ -19,7 +19,7 @@
 
 - [ ] **A — Trần Đình Đăng (01998)** — Lead / Coordinator / Data Foundation
 - [ ] **B — Dương Mạnh Phong (01557)**  — Order/Seller + Delivery Agent
-- [ ] **C — Chu Thành Dũng**  — Payment + Policy Agent
+- [ ] **C — Chu Thành Dũng(01405)**  — Payment + Policy Agent
 - [ ] **D — Đặng Thái Nam Sơn (01431)**  — Verifier + Trace + Individual Reports
 
 ---
