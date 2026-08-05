@@ -6,11 +6,11 @@
 
 | Thông tin       | Nội dung     |
 | --------------- | ------------ |
-| Họ và tên       | [Họ và tên]  |
-| MSSV            | [MSSV]       |
+| Họ và tên       | [Đặng Thái Nam Sơn]  |
+| MSSV            | [2A202601431]       |
 | Khóa/Lớp        | [K3]         |
 | Vai trò chính   | [Vai trò]    |
-| Ngày hoàn thành | [YYYY-MM-DD] |
+| Ngày hoàn thành | [2026-08-05] |
 
 ## 2. Vai trò và phạm vi công việc
 
@@ -117,5 +117,5 @@ Giải thích ngắn gọn bằng lời của bạn:
 - [ ] Báo cáo không chứa `.env`, API key, token hoặc secret.
 - [ ] Báo cáo này không phải bản sao nguyên văn của báo cáo nhóm hoặc báo cáo thành viên khác.
 
-**Họ và tên:** [Họ và tên]
-**Ngày xác nhận:** [YYYY-MM-DD]
+**Họ và tên:** [Đặng Thái Nam Sơn]
+**Ngày xác nhận:** [2026-08-05]
