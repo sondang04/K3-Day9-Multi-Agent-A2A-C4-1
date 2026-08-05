@@ -49,11 +49,11 @@
 
 | #   | Task                                                                                                                          | Owner | Tick |
 | --- | ----------------------------------------------------------------------------------------------------------------------------- | ----- | ---- |
-| 1.1 | Định nghĩa `CaseContext` dataclass trong `schema.py` (order, items, payments, seller, timestamps)                             | A     | [ ]  |
-| 1.2 | Code `data_loader.py` — load 9 CSV thành dict lookup O(1) theo `order_id`, `order_item_id`, `seller_id`, `payment_sequential` | A     | [ ]  |
-| 1.3 | Test load với 1 order thật, in ra `CaseContext` đầy đủ                                                                        | A     | [ ]  |
-| 1.4 | Push `schema.py` + `data_loader.py` lên `main`                                                                                | A     | [ ]  |
-| 1.5 | B/C/D pull code mới về nhánh của mình                                                                                         | B/C/D | [ ]  |
+| 1.1 | Định nghĩa `CaseContext` dataclass trong `schema.py` (order, items, payments, seller, timestamps)                             | A     | [x]  |
+| 1.2 | Code `data_loader.py` — load 9 CSV thành dict lookup O(1) theo `order_id`, `order_item_id`, `seller_id`, `payment_sequential` | A     | [x]  |
+| 1.3 | Test load với 1 order thật, in ra `CaseContext` đầy đủ                                                                        | A     | [x]  |
+| 1.4 | Push `schema.py` + `data_loader.py` lên `main`                                                                                | A     | [x]  |
+| 1.5 | B/C/D pull code mới về nhánh của mình                                                                                         | B/C/D | [x]  |
 
 
 ---
@@ -179,15 +179,15 @@
 ## Tiến độ tổng (đếm tick)
 
 
-| Phase                    | Tổng task | Đã xong | %      |
-| ------------------------ | --------- | ------- | ------ |
-| Phase 0 — Setup          | 7         | 6       | 86%    |
-| Phase 1 — Schema & Data  | 5         | 0       | 0%     |
-| Phase 2 — Agents lõi     | 27        | 0       | 0%     |
-| Phase 3 — Coordinator    | 6         | 0       | 0%     |
+| Phase                    | Tổng task | Đã xong | %       |
+| ------------------------ | --------- | ------- | ------- |
+| Phase 0 — Setup          | 7         | 6       | 86%     |
+| Phase 1 — Schema & Data  | 5         | 0       | 0%      |
+| Phase 2 — Agents lõi     | 27        | 0       | 0%      |
+| Phase 3 — Coordinator    | 6         | 0       | 0%      |
 | Phase 4 — Kiểm thử       | 7         | 0       | 0%     |
 | Phase 5 — Tài liệu & Nộp | 10        | 0       | 0%     |
-| **TỔNG**                 | **62**    | **6**   | **10%** |
+| **TỔNG**                 | **62**    | **11**  | **18%** |
 
 
 ---
