@@ -20,7 +20,7 @@
 - [ ] **A — Trần Đình Đăng (01998)** — Lead / Coordinator / Data Foundation
 - [ ] **B — Dương Mạnh Phong (01557)**  — Order/Seller + Delivery Agent
 - [ ] **C — Chu Thành Dũng**  — Payment + Policy Agent
-- [ ] **D —**  — Verifier + Trace + Individual Reports
+- [ ] **D — Đặng Thái Nam Sơn (01431)**  — Verifier + Trace + Individual Reports
 
 ---
 
@@ -105,15 +105,26 @@
 
 | #    | Task                                                                                                                   | Tick |
 | ---- | ---------------------------------------------------------------------------------------------------------------------- | ---- |
-| 2D.1 | Tạo file `verifier_agent.py`                                                                                           | [ ]  |
-| 2D.2 | Hàm `verify(output, ctx)` kiểm tra evidence ID tồn tại trong CSV (lookup `data_loader`)                                | [ ]  |
-| 2D.3 | Kiểm tra giới hạn: ≤5 ID/loại, ≤10 evidence, ≤3 root causes, ≤3 parties, ≤5 actions                                    | [ ]  |
-| 2D.4 | Kiểm tra `confidence ∈ [0,1]`, số tiền `recommended_refund ≤ payment_total`                                            | [ ]  |
-| 2D.5 | Kiểm tra schema đúng README mục 6 (đủ field, đúng kiểu)                                                                | [ ]  |
-| 2D.6 | Tạo file `trace.py` sinh `trace.jsonl` (1 dòng/case: case_id, handoff steps, primary_issue, confidence, verifier_pass) | [ ]  |
+| 2D.1 | Tạo file `verifier_agent.py`                                                                                           | [x]  |
+| 2D.2 | Hàm `verify(output, ctx)` kiểm tra evidence ID tồn tại trong CSV (lookup `data_loader`)                                | [x]  |
+| 2D.3 | Kiểm tra giới hạn: ≤5 ID/loại, ≤10 evidence, ≤3 root causes, ≤3 parties, ≤5 actions                                    | [x]  |
+| 2D.4 | Kiểm tra `confidence ∈ [0,1]`, số tiền `recommended_refund ≤ payment_total`                                            | [x]  |
+| 2D.5 | Kiểm tra schema đúng README mục 6 (đủ field, đúng kiểu)                                                                | [x]  |
+| 2D.6 | Tạo file `trace.py` sinh `trace.jsonl` (1 dòng/case: case_id, handoff steps, primary_issue, confidence, verifier_pass) | [x]  |
 | 2D.7 | Copy `individual_01998_TranDinhDang.md` → `individual_<MSSV>_<Ten>.md` cho 4 người                                     | [ ]  |
-| 2D.8 | Tạo file `run_batch.py` — loop 50 case, gọi Coordinator, ghi `output/EC_XXX.json`                                      | [ ]  |
+| 2D.8 | Tạo file `run_batch.py` — loop 50 case, gọi Coordinator, ghi `output/EC_XXX.json`                                      | [x]  |
 | 2D.9 | Commit + push nhánh `feat/person-D`                                                                                    | [ ]  |
+
+**Ghi chú của D:**
+
+- `verifier_agent.verify(output, ctx, loader=None, check_csv=True)` trả về `VerificationResult`
+  (`passed` / `errors` / `warnings`). Ngoài 4 nhóm check theo phân công, verifier còn đối chiếu
+  `primary_issue ↔ cause_code ↔ action ↔ responsible_party ↔ refund basis` theo bảng README mục 4,
+  nên nó bắt được cả lỗi mapping của Policy Agent, không chỉ lỗi schema.
+- `run_batch.py` tự động dùng `coordinator_agent.py` khi A push lên (`--pipeline coordinator|local|auto`).
+  Khi chưa có coordinator, nó gọi trực tiếp 4 sub-agent của B/C theo đúng thứ tự handoff và tổng hợp
+  output theo README mục 6 → nhóm chạy được full batch trước khi Phase 3 xong.
+- `test_person_d.py`: 35 unit test cho verifier + trace (`python test_person_d.py` — pass 35/35).
 
 
 ---
@@ -128,9 +139,12 @@
 | 3.1 | A merge 3 nhánh B/C/D vào `main`, resolve conflict                                                                             | A         | [ ]  |
 | 3.2 | Code `coordinator_agent.py`: nhận `EC_XXX.json` → build `CaseContext` → gọi 4 sub-agent → tổng hợp → gọi Verifier → ghi output | A         | [ ]  |
 | 3.3 | Test 1 case đầu (`EC_001`), output khớp schema                                                                                 | A         | [ ]  |
-| 3.4 | Chạy batch 5 case đầu, kiểm tra 5 file output                                                                                  | D         | [ ]  |
+| 3.4 | Chạy batch 5 case đầu, kiểm tra 5 file output                                                                                  | D         | [x]  |
 | 3.5 | Fix bug interface / data flow nếu có                                                                                           | A + B/C/D | [ ]  |
-| 3.6 | Chạy full 50 case                                                                                                              | D         | [ ]  |
+| 3.6 | Chạy full 50 case                                                                                                              | D         | [x]  |
+
+> 3.4 và 3.6 chạy bằng `run_batch.py` với pipeline nội bộ vì `coordinator_agent.py` (3.2) chưa có.
+> Khi A xong 3.2, chạy lại `python run_batch.py --pipeline coordinator` để chốt số cuối cùng.
 
 
 ---
@@ -142,13 +156,24 @@
 
 | #   | Task                                                      | Owner | Tick |
 | --- | --------------------------------------------------------- | ----- | ---- |
-| 4.1 | Đếm output: đúng 50 file, không file lạ                   | D     | [ ]  |
-| 4.2 | Lọc các case bị Verifier fail, liệt kê cho A              | D     | [ ]  |
+| 4.1 | Đếm output: đúng 50 file, không file lạ                   | D     | [x]  |
+| 4.2 | Lọc các case bị Verifier fail, liệt kê cho A              | D     | [x]  |
 | 4.3 | Đối chiếu bảng rule với 3–5 case bất kỳ (sample thủ công) | C     | [ ]  |
 | 4.4 | Sửa rule/evidence sai (nếu có)                            | B + C | [ ]  |
 | 4.5 | Sửa `confidence` nếu nhiều case >0.95 không hợp lý        | C     | [ ]  |
-| 4.6 | Chạy lại batch sau khi sửa, đảm bảo deterministic         | D     | [ ]  |
-| 4.7 | Sinh `trace.jsonl` cuối cùng (đè file cũ, không append)   | D     | [ ]  |
+| 4.6 | Chạy lại batch sau khi sửa, đảm bảo deterministic         | D     | [x]  |
+| 4.7 | Sinh `trace.jsonl` cuối cùng (đè file cũ, không append)   | D     | [x]  |
+
+**Kết quả batch mới nhất (D chạy):**
+
+| Chỉ số            | Giá trị                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| Output            | 50/50 file `EC_001.json` … `EC_050.json`, không file lạ                              |
+| Verifier          | pass 50/50, fail 0 (fail sẽ được ghi ra `logging/verifier_report.json` cho A)         |
+| Deterministic     | chạy 2 lần, md5 toàn bộ `output/` giống hệt nhau                                     |
+| Trace             | `trace.jsonl` 50 dòng (ghi đè, không append) + bản mirror `logging/trace.jsonl`       |
+| Phân bố rule      | canceled 8 · unavailable 8 · late_seller 8 · late_logistics 8 · split 9 · unsupported 9 |
+| Confidence hiện tại | 0.95 (case rõ ràng) · 0.90 (order không có item) · 0.85 (split payment / multi-seller) |
 
 
 ---
@@ -181,13 +206,17 @@
 
 | Phase                    | Tổng task | Đã xong | %       |
 | ------------------------ | --------- | ------- | ------- |
-| Phase 0 — Setup          | 7         | 6       | 86%     |
-| Phase 1 — Schema & Data  | 5         | 0       | 0%      |
-| Phase 2 — Agents lõi     | 27        | 0       | 0%      |
-| Phase 3 — Coordinator    | 6         | 0       | 0%      |
-| Phase 4 — Kiểm thử       | 7         | 0       | 0%     |
-| Phase 5 — Tài liệu & Nộp | 10        | 0       | 0%     |
-| **TỔNG**                 | **62**    | **11**  | **18%** |
+| Phase 0 — Setup          | 7         | 7       | 100%    |
+| Phase 1 — Schema & Data  | 5         | 5       | 100%    |
+| Phase 2 — Agents lõi     | 27        | 25      | 93%     |
+| Phase 3 — Coordinator    | 6         | 2       | 33%     |
+| Phase 4 — Kiểm thử       | 7         | 4       | 57%     |
+| Phase 5 — Tài liệu & Nộp | 10        | 0       | 0%      |
+| **TỔNG**                 | **62**    | **43**  | **69%** |
+
+> Phase 2 còn 2D.7 (file individual cho B/C) và 2D.9 (push nhánh D — code đã merge vào `main`).
+> Việc lớn nhất còn lại là 3.2 `coordinator_agent.py` của A; chạy xong thì lặp lại
+> `python run_batch.py --pipeline coordinator` rồi tick tiếp Phase 4/5.
 
 
 ---
